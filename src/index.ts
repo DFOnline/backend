@@ -1,15 +1,20 @@
 import express from 'express';
 
-import { getUserName } from './util/MojangAPI.js';
+import { UserAccess, UserAccessArray } from './user/user.js';
+import UserRouter from './user/router.js';
+
+const UserAccessInstance = new UserAccessArray();
 
 const APP = express();
+
+APP.use('/user',UserRouter);
 
 APP.get('/',(req,res) => {
     res.send('ping')
 });
 
-console.log(await getUserName('4566e69fc90748ee8d71d7ba5aa00d20'))
-
 APP.listen(80, () => {
     console.log('App is listening.')
 });
+
+export { UserAccessInstance }
