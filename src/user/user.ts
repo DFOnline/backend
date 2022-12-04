@@ -1,4 +1,7 @@
 import { randomBytes, createHash } from 'crypto';
+import { NextFunction, Request, Response } from 'express';
+import type { IncomingHttpHeaders } from 'http'
+import { UserAccessInstance } from 'index';
 
 export type username = string;
 export type uuid     = string;
@@ -46,9 +49,30 @@ export class UserAccess {
         this.user = user;
         this.valid = true;
     }
+}
 
-    get isValid() {
-        return this.serverCode != null;
+export class AuthorizedRequest extends Request {
+    user: UserAccess | null;
+    headers: IncomingHttpHeaders & Headers;
+
+    /**
+     * Get authorization from an incoming request, using headers
+     * @param reject If unauthorized users should be rejected
+     * @returns A middleware with given options
+     */
+    static middleware(reject = true) {
+        return (req: AuthorizedRequest, res: Response, next: NextFunction): void => {
+            const commonCode = req.headers.authorization?.replace('Bearer ','');
+            if(!commonCode) {
+                if(reject) res.status(401).send('Invalid authorization');
+                else {req.user = null; next();};
+                return;
+            }
+            const user = UserAccessInstance.getByCommonSecret(commonCode);
+            if(user == null) { res.status(401).send('User could not be find with given code') }
+            req.user = user;
+            next(); return;
+        }
     }
 }
 

@@ -1,0 +1,9 @@
+// Blocking users from adding things up to the service
+{
+    "global"  : [],
+    "dfscript": [
+        {"user": "fadf6f9e-d051-4425-8808-5390354bc2a5", "reason": "Racism, Moderator intent", "by": "TechStreet"}
+    ],
+    "plots": {},
+    "templates": {}
+}

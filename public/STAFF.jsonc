@@ -1,0 +1,13 @@
+// This file contains all users who can use admin in various projects.
+// UUIDs of same length should be sorted alphabetically by the user's name they represent
+{
+    /* DFScript Staff can do the following:
+    * - Use owner actions for scripts they don't own
+    * - Verify and remove verification from scripts
+    */
+    "DFScript": [
+        "184c84ee-c445-4772-8d19-9e409031f0db", // BlazeMCWorld
+        "901c4cd0-98b9-4d3d-a8e9-08d15c6a4472", // GeorgeRNG
+        "45e89639-1fb6-4f73-9456-7fee19f42da9"  // TechStreet 
+    ]
+}
