@@ -1,0 +1,3 @@
+{
+    "store": "./dist/store.json" // just use json 🤩
+}

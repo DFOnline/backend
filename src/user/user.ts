@@ -1,7 +1,7 @@
 import { randomBytes, createHash } from 'crypto';
 import { NextFunction, Request, Response } from 'express';
 import type { IncomingHttpHeaders } from 'http'
-import { UserAccessInstance } from 'index';
+import { UserAccessInstance } from '../index.js';
 
 export type username = string;
 export type uuid     = string;
