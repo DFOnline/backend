@@ -1,11 +1,11 @@
 import { uuid } from "../user/user.js";
 import { gunzipSync, gzipSync } from 'zlib';
 
-class Script {
-    owner: uuid;
-    verified: boolean;
-
-    compressed: Buffer;
+export default class Script {
+    protected owner: uuid;
+    protected verified: boolean;
+    /** Compressed storage */
+    protected compressed: Buffer;
 
     /**
      * 
@@ -19,10 +19,27 @@ class Script {
         this.verified = verified;
     }
 
+    getOwner() {return this.owner;}
+    getVerified() {return this.verified;}
+    getCompressed() {return this.compressed;}
+
+    setOwner(owner: string) {this.owner = owner;}
+    setVerified(verified: boolean) {this.verified = verified;}
+    setCompressed(compressed: Buffer) {this.compressed = compressed}
+
     get raw(): string {
         return gunzipSync(this.compressed).toString();
     }
     set raw(data: string) {
-        this.compressed = gzipSync(Buffer.from(data));
+        this.setCompressed(gzipSync(Buffer.from(data)));
+    }
+
+
+    toJSON() {
+        return {
+            owner: this.owner,
+            verified: this.verified,
+            data: this.compressed.toString('base64')
+        }
     }
 }

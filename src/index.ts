@@ -3,10 +3,13 @@ import express from 'express';
 import { UserAccessArray } from './user/user.js';
 import UserRouter from './user/router.js';
 import { Config as Configure, Storage } from './util/file.js';
+import ScriptStorage from './script/store.js';
 
 const Config = await Configure.get('./public/CONFIG.jsonc');
 const Store = new Storage(Config);
 await Store.open();
+const Scripts = new ScriptStorage(Store);
+console.log(Scripts.get('a'))
 const UserAccessInstance = new UserAccessArray();
 
 const APP = express();
