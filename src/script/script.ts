@@ -27,6 +27,10 @@ export default class Script {
     setVerified(verified: boolean) {this.verified = verified;}
     setCompressed(compressed: Buffer) {this.compressed = compressed}
 
+    getRaw(): DFScript {
+        return JSON.parse(this.raw);
+    }
+
     get raw(): string {
         return gunzipSync(this.compressed).toString();
     }
@@ -34,12 +38,23 @@ export default class Script {
         this.setCompressed(gzipSync(Buffer.from(data)));
     }
 
-
     toJSON() {
         return {
+            name: this.getRaw().name,
             owner: this.owner,
+            data: this.compressed.toString('base64'),
             verified: this.verified,
-            data: this.compressed.toString('base64')
         }
     }
+}
+
+export interface DFScript {
+    name: string
+    owner: string
+    server: string
+    description: string
+    actions: any[]
+    config: any[]
+    disabled: boolean
+    version: 4
 }
