@@ -1,5 +1,6 @@
 import express from 'express';
 
+import { Config as Configure, Storage } from './util/file.js';
 import { UserAccessArray } from './user/user.js';
 import UserRouter from './user/router.js';
 import { Config as Configure, Storage } from './util/file.js';
@@ -23,7 +24,7 @@ APP.get('/',(req,res) => {
     res.send('ping')
 });
 
-APP.listen(80, () => {
+APP.listen(Config.port, () => {
     console.log('App is listening.');
 });
 

@@ -4,17 +4,22 @@ import { jsonc } from "jsonc"
 export class Config {
     private data: {
         store: string;
+        port: number;
     }
 
     get storagePath(): string {
         return this.data.store;
+    }
+    get port(): number {
+        return this.data.port;
     }
 
     private constructor (data : string) {
         const parsed = jsonc.parse(data);
         if(typeof parsed.store !== 'string') throw TypeError("Value `store` is not a string.");
         this.data = {
-            'store': parsed['store']
+            'store': parsed['store'],
+            'port': parsed['port']
         }
     }
 

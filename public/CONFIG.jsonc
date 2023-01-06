@@ -1,3 +1,4 @@
 {
-    "store": "./dist/store.json" // just use json 🤩
+    "store": "./dist/store.json", // just use json 🤩
+    "port": 80
 }
