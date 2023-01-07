@@ -54,6 +54,7 @@ export class UserAccess {
 export class AuthorizedRequest extends Request {
     user: UserAccess | null;
     headers: IncomingHttpHeaders & Headers;
+    params: Record<string, string>
 
     /**
      * Get authorization from an incoming request, using headers
