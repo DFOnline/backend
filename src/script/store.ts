@@ -32,7 +32,7 @@ export default class ScriptStorage {
         }
     }
     set(id: string, value: StoredScript | Script) {
-        this.store.set(['scripts',id],value);
+        this.store.set(['scripts',id],value.toJSON());
     }
 }
 
