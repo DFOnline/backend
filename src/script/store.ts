@@ -40,7 +40,7 @@ export class StoredScript extends Script {
     private store: ScriptStorage;
     private id: string;
 
-    constructor(store: ScriptStorage, id: string, owner: string, data: Buffer, verified: boolean) {
+    constructor(store: ScriptStorage, id: string, owner: string, data: Buffer, verified: string) {
         super(owner, data, verified);
         this.store = store;
         this.id = id;
@@ -58,7 +58,7 @@ export class StoredScript extends Script {
         super.setOwner(owner);
         this.save();
     }
-    setVerified(verified: boolean) {
+    setVerified(verified: string) {
         super.setVerified(verified);
         this.save();
     }

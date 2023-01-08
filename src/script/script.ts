@@ -3,7 +3,7 @@ import { gunzipSync, gzipSync } from 'zlib';
 
 export default class Script {
     protected owner: uuid;
-    protected verified: boolean;
+    protected verified: string | null;
     /** Compressed storage */
     protected compressed: Buffer;
 
@@ -13,7 +13,7 @@ export default class Script {
      * @param data Compressed GZIP buffer.
      * @param verified If the script is verified by staff.
      */
-    constructor(owner: uuid, data: Buffer, verified = false) {
+    constructor(owner: uuid, data: Buffer, verified: string | null) {
         this.owner = owner;
         this.compressed = data;
         this.verified = verified;
@@ -24,7 +24,7 @@ export default class Script {
     getCompressed() {return this.compressed;}
 
     setOwner(owner: string) {this.owner = owner;}
-    setVerified(verified: boolean) {this.verified = verified;}
+    setVerified(verified: string | null) {this.verified = verified}
     setCompressed(compressed: Buffer) {this.compressed = compressed}
 
     getRaw(): DFScript {
